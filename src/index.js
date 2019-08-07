@@ -1,11 +1,5 @@
-const {
-  BaseKonnector,
-  saveFiles,
-  log,
-  cozyClient
-} = require('cozy-konnector-libs')
+const { BaseKonnector, saveFiles, log } = require('cozy-konnector-libs')
 const soap = require('soap')
-const Readable = require('stream').Readable
 
 const baseWSDL = 'https://www.silaexpert01.fr/Silae/SWS/SWS.asmx?WSDL'
 const basePath = '/Silae/SWS/SWS.asmx'
@@ -144,33 +138,35 @@ function savingDocuments(documentList, loginInfo, fields) {
               ID_PAISALARIE: loginInfo.id_paisalarie,
               NatureImage: 1,
               ID_IMAGE: document.ID_PAIBULLETIN
-              // document.BUL_Periode : Date bulletin
             },
             function(err, result) {
-              console.log(result)
-              // const s = new Readable()
-              // s._read = () => {} // redundant? see update below
-              // s.push(result.SWS_UtilisateurSalarieRecupererImageResult.Image)
-              // s.push(null)
-              // cozyClient.files.create(s, { name: 'test.pdf' })
-              saveFiles([
-                {
-                  filestream:
-                    result.SWS_UtilisateurSalarieRecupererImageResult.Image,
-                  filename: 'test.pdf'
-                },
+              const binaryData = Buffer.from(
+                result.SWS_UtilisateurSalarieRecupererImageResult.Image,
+                'base64'
+              )
+              const filename =
+                'bulletin_' +
+                document.BUL_Periode.getFullYear() +
+                '_' +
+                (document.BUL_Periode.getMonth() + 1) +
+                '_' +
+                document.BUL_Periode.getDate() +
+                '.pdf'
+              saveFiles(
+                [
+                  {
+                    filestream: binaryData,
+                    filename: filename,
+                    contentType: 'application/pdf'
+                  }
+                ],
                 fields
-              ])
+              )
               resolve(result)
             }
           )
         })
-      )
-        // .then(result => {
-        //   log('debug', result)
-        //   console.log(fields)
-        // })
-        .catch(error => log('error', error))
+      ).catch(error => log('error', error))
     )
   )
 }
