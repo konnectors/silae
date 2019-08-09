@@ -25,7 +25,7 @@ function authenticate(username, password) {
   log('debug', 'Getting WSDL from ' + baseWSDL)
   return new Promise((resolve, reject) =>
     soap.createClient(baseWSDL, function(err, client) {
-      if (err) reject(err)
+      if (err) return reject(err)
       log('info', 'Client successfully created')
       client.SWS_SiteLoginEx(
         {
@@ -35,7 +35,7 @@ function authenticate(username, password) {
           USRPassword: password
         },
         function(err, result) {
-          if (err) reject(err)
+          if (err) return reject(err)
           if (result.SWS_SiteLoginExResult.Error)
             reject(result.SWS_SiteLoginExResult.Error)
           resolve(result)
@@ -49,7 +49,7 @@ function authenticate(username, password) {
       log('debug', 'Using AdresseFermeDistante ' + adresseFermeDistante)
       return new Promise((resolve, reject) =>
         soap.createClient(baseWSDL, (err, client) => {
-          if (err) reject(err)
+          if (err) return reject(err)
           client.setEndpoint('https://' + adresseFermeDistante + basePath)
           client.SWS_SiteLoginEx(
             {
@@ -59,7 +59,7 @@ function authenticate(username, password) {
               USRPassword: password
             },
             function(err, result) {
-              if (err) reject(err)
+              if (err) return reject(err)
               if (result.SWS_SiteLoginExResult.Error)
                 reject(result.SWS_SiteLoginExResult.Error)
               resolve(result)
@@ -74,7 +74,7 @@ function authenticate(username, password) {
       log('debug', 'Using RepartiteurAdresse ' + loginInfo.repartiteurAdresse)
       return new Promise((resolve, reject) =>
         soap.createClient(baseWSDL, (err, client) => {
-          if (err) reject(err)
+          if (err) return reject(err)
           client.setEndpoint(
             'https://' + loginInfo.repartiteurAdresse + basePath
           )
@@ -86,7 +86,7 @@ function authenticate(username, password) {
               USRPassword: password
             },
             function(err, result) {
-              if (err) reject(err)
+              if (err) return reject(err)
               if (result.SWS_SiteLoginExResult.Error)
                 reject(result.SWS_SiteLoginExResult.Error)
               resolve(result)
@@ -112,7 +112,7 @@ function authenticate(username, password) {
 function getDocumentList(loginInfo) {
   return new Promise((resolve, reject) =>
     soap.createClient(baseWSDL, function(err, client) {
-      if (err) reject(err)
+      if (err) return reject(err)
       client.setEndpoint('https://' + loginInfo.repartiteurAdresse + basePath)
       client.SWS_UtilisateurSalarieListeBulletins(
         {
@@ -121,7 +121,7 @@ function getDocumentList(loginInfo) {
           ID_PAISALARIE: loginInfo.id_paisalarie
         },
         function(err, result) {
-          if (err) reject(err)
+          if (err) return reject(err)
           if (result.SWS_UtilisateurSalarieListeBulletinsResult.Error)
             reject(result.SWS_UtilisateurSalarieListeBulletinsResult.Error)
           resolve(
@@ -144,7 +144,7 @@ function savingDocuments(documentList, loginInfo, fields) {
     documentList.map(document =>
       new Promise((resolve, reject) =>
         soap.createClient(baseWSDL, function(err, client) {
-          if (err) reject(err)
+          if (err) return reject(err)
           client.setEndpoint(
             'https://' + loginInfo.repartiteurAdresse + basePath
           )
@@ -157,7 +157,7 @@ function savingDocuments(documentList, loginInfo, fields) {
               ID_IMAGE: document.ID_PAIBULLETIN
             },
             function(err, result) {
-              if (err) reject(err)
+              if (err) return reject(err)
               if (result.SWS_UtilisateurSalarieRecupererImageResult.Error)
                 reject(result.SWS_UtilisateurSalarieRecupererImageResult.Error)
               const binaryData = Buffer.from(
