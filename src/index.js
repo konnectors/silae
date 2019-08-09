@@ -23,8 +23,9 @@ async function start(fields, cozyParameters) {
 function authenticate(username, password) {
   let loginInfo = {}
   log('debug', 'Getting WSDL from ' + baseWSDL)
-  return new Promise(resolve =>
+  return new Promise((resolve, reject) =>
     soap.createClient(baseWSDL, function(err, client) {
+      if (err) reject(err)
       log('info', 'Client successfully created')
       client.SWS_SiteLoginEx(
         {
@@ -34,6 +35,9 @@ function authenticate(username, password) {
           USRPassword: password
         },
         function(err, result) {
+          if (err) reject(err)
+          if (result.SWS_SiteLoginExResult.Error)
+            reject(result.SWS_SiteLoginExResult.Error)
           resolve(result)
         }
       )
@@ -43,8 +47,9 @@ function authenticate(username, password) {
       const adresseFermeDistante =
         result.SWS_SiteLoginExResult.AdresseFermeDistante
       log('debug', 'Using AdresseFermeDistante ' + adresseFermeDistante)
-      return new Promise(resolve =>
+      return new Promise((resolve, reject) =>
         soap.createClient(baseWSDL, (err, client) => {
+          if (err) reject(err)
           client.setEndpoint('https://' + adresseFermeDistante + basePath)
           client.SWS_SiteLoginEx(
             {
@@ -54,6 +59,9 @@ function authenticate(username, password) {
               USRPassword: password
             },
             function(err, result) {
+              if (err) reject(err)
+              if (result.SWS_SiteLoginExResult.Error)
+                reject(result.SWS_SiteLoginExResult.Error)
               resolve(result)
             }
           )
@@ -64,8 +72,9 @@ function authenticate(username, password) {
       loginInfo.repartiteurAdresse =
         result.SWS_SiteLoginExResult.RepartiteurAdresse
       log('debug', 'Using RepartiteurAdresse ' + loginInfo.repartiteurAdresse)
-      return new Promise(resolve =>
+      return new Promise((resolve, reject) =>
         soap.createClient(baseWSDL, (err, client) => {
+          if (err) reject(err)
           client.setEndpoint(
             'https://' + loginInfo.repartiteurAdresse + basePath
           )
@@ -77,6 +86,9 @@ function authenticate(username, password) {
               USRPassword: password
             },
             function(err, result) {
+              if (err) reject(err)
+              if (result.SWS_SiteLoginExResult.Error)
+                reject(result.SWS_SiteLoginExResult.Error)
               resolve(result)
             }
           )
@@ -98,8 +110,9 @@ function authenticate(username, password) {
 }
 
 function getDocumentList(loginInfo) {
-  return new Promise(resolve =>
+  return new Promise((resolve, reject) =>
     soap.createClient(baseWSDL, function(err, client) {
+      if (err) reject(err)
       client.setEndpoint('https://' + loginInfo.repartiteurAdresse + basePath)
       client.SWS_UtilisateurSalarieListeBulletins(
         {
@@ -108,6 +121,9 @@ function getDocumentList(loginInfo) {
           ID_PAISALARIE: loginInfo.id_paisalarie
         },
         function(err, result) {
+          if (err) reject(err)
+          if (result.SWS_UtilisateurSalarieListeBulletinsResult.Error)
+            reject(result.SWS_UtilisateurSalarieListeBulletinsResult.Error)
           resolve(
             result.SWS_UtilisateurSalarieListeBulletinsResult.Elements
               .CPAISWSUtilisateurSalarieListeBulletinsElement
@@ -126,8 +142,9 @@ function getDocumentList(loginInfo) {
 function savingDocuments(documentList, loginInfo, fields) {
   return Promise.all(
     documentList.map(document =>
-      new Promise(resolve =>
+      new Promise((resolve, reject) =>
         soap.createClient(baseWSDL, function(err, client) {
+          if (err) reject(err)
           client.setEndpoint(
             'https://' + loginInfo.repartiteurAdresse + basePath
           )
@@ -140,6 +157,9 @@ function savingDocuments(documentList, loginInfo, fields) {
               ID_IMAGE: document.ID_PAIBULLETIN
             },
             function(err, result) {
+              if (err) reject(err)
+              if (result.SWS_UtilisateurSalarieRecupererImageResult.Error)
+                reject(result.SWS_UtilisateurSalarieRecupererImageResult.Error)
               const binaryData = Buffer.from(
                 result.SWS_UtilisateurSalarieRecupererImageResult.Image,
                 'base64'
