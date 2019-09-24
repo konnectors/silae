@@ -1,10 +1,10 @@
 {
-  "name": "cozy-konnector-template",
+  "name": "cozy-konnector-silae",
   "version": "1.0.0",
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/konnectors/template.git"
+    "url": "git+https://github.com/konnectors/silae.git"
   },
   "keywords": [],
   "author": "Cozy Cloud",
@@ -33,7 +33,7 @@
     "clean": "rm -rf ./data",
     "build": "webpack",
     "lint": "eslint --fix .",
-    "deploy": "git-directory-deploy --directory build/ --branch ${DEPLOY_BRANCH:-build} --repo=${DEPLOY_REPOSITORY:-git@github.com:konnectors/template.git}",
+    "deploy": "git-directory-deploy --directory build/ --branch ${DEPLOY_BRANCH:-build} --repo=${DEPLOY_REPOSITORY:-git@github.com:konnectors/silae.git}",
     "cozyPublish": "cozy-app-publish --token $REGISTRY_TOKEN --build-commit $(git rev-parse ${DEPLOY_BRANCH:-build})",
     "travisDeployKey": "./bin/generate_travis_deploy_key"
   },
