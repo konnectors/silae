@@ -4,9 +4,9 @@
   "type": "konnector",
   "language": "node",
   "icon": "icon.png",
-  "slug": "template",
-  "source": "git@github.com:konnectors/template.git",
-  "editor": "Cozy",
+  "slug": "silae",
+  "source": "git@github.com:konnectors/silae.git",
+  "editor": "AZn5ReD",
   "vendor_link": "https://www.silaexpert.fr/",
   "categories": ["other"],
   "fields": {
@@ -28,12 +28,6 @@
   ],
   "screenshots": [],
   "permissions": {
-    "bank operations": {
-      "type": "io.cozy.bank.operations"
-    },
-    "bills": {
-      "type": "io.cozy.bills"
-    },
     "files": {
       "type": "io.cozy.files"
     },
