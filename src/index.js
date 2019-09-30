@@ -1,6 +1,6 @@
 process.env.SENTRY_DSN =
   process.env.SENTRY_DSN ||
-    'https://699e0e989af94c5faf8fb83096b6e896@sentry.cozycloud.cc/129'
+  'https://699e0e989af94c5faf8fb83096b6e896@sentry.cozycloud.cc/129'
 
 /* eslint-disable require-atomic-updates */
 const { BaseKonnector, saveFiles, log } = require('cozy-konnector-libs')
