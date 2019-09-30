@@ -1,0 +1,39 @@
+language: node_js
+node_js:
+- '8'
+env:
+  global:
+  - DEPLOY_REPOSITORY="git@github.com:konnectors/silae.git"
+  - secure: zsmTcfLQhfL8JXAQP4UjaFThRHclhNp7CL9BDEyrxRVbsNQMbnk7/SNnt0bXFXoqn8RuvalrAJ6gDYNIeZAVEMXGwLup+Z55lydtM/HbA713AUWW6lnYKi51nkoe+cboNzXTWx3zKhvfUCGftowzq9Mboy0MNeH9yYg3DMbFuzVUQMVEawJQImlX243BWKMip1oK7B8F8gsSLeVQkUJEIZ1A6ydyiIiXE4JuHrXtWvJwAS316n9ZZcqTdK5ytj+fot4MDRfjnYUXIBAZkDQ3BGKdJR/R54IRgAn0LkzHrsLC41pOuR7KFBW8XOo6eY2lbsyG8UGoMKovBcuPwhhHa9OerID+QYZCcbTAekrYTIsbIuPg5242NVTgBOOoniJzoreE3p6/zwjryapIC0leJpEx2FdqPhLS1ROkjGBzCe9rumvuL7Evq2njCI8JJzvH0JlXJFw4JIrK9l2+m23+iL/mKilYs4DaK0DC3ZslWYTaNJJdW44ZZWfHjMcewQLXGzojXm9W/EvFH/5t4YX+dvYFIhq0YiUi1vEY+Ow3yKqOFV/h21cR/ft+LIvzekxFZwm5EJA1FFCpInzKBHjcMK/JkWC65D65WawNwI9K+Q8ns28BtCB7Kj7xRKZ/Wc44HLW0h8DCBD3IpmEj7sVozkC743bXNLDTPkQkXJ9yKQc=
+cache:
+  yarn: true
+  directories:
+  - node_modules
+branches:
+  except:
+  - build
+  - build-debug
+script:
+- yarn lint
+- yarn build
+- yarn run check
+deploy:
+- provider: script
+  skip-cleanup: true
+  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish
+  on:
+    branch: master
+- provider: script
+  skip-cleanup: true
+  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish
+  on:
+    tags: true
+before_install:
+- openssl aes-256-cbc -K $encrypted_89a2e3d72939_key -iv $encrypted_89a2e3d72939_iv
+  -in github_deploy_key.enc -out /tmp/github_deploy_key -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/github_deploy_key
+- ssh-add /tmp/github_deploy_key
+after_deploy:
+- rm /tmp/github_deploy_key
+- ssh-add -D
