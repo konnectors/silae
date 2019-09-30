@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+  "name": "Silae",
+  "type": "konnector",
+  "language": "node",
+  "icon": "icon.png",
+  "slug": "silae",
+  "source": "git@github.com:konnectors/silae.git",
+  "editor": "AZn5ReD",
+  "vendor_link": "https://www.silaexpert.fr/",
+  "categories": ["other"],
+  "fields": {
+    "login": {
+      "type": "text"
+    },
+    "password": {
+      "type": "password"
+    },
+    "advancedFields": {
+      "folderPath": {
+        "advanced": true,
+        "isRequired": false
+      }
+    }
+  },
+  "data_types": [
+    "documents"
+  ],
+  "screenshots": [],
+  "permissions": {
+    "files": {
+      "type": "io.cozy.files"
+    },
+    "accounts": {
+      "type": "io.cozy.accounts",
+      "verbs": ["GET"]
+    }
+  },
+  "developer": {
+    "name": "AZn5ReD",
+    "url": "https://github.com/AZn5ReD"
+  },
+  "langs": ["fr", "en"],
+  "locales": {
+    "fr": {
+      "short_description": "Récupère vos fiches de paie",
+      "long_description": "Récupère vos fiches de paie",
+      "permissions": {
+        "files": {
+          "description": "Utilisé pour sauvegarder les fiches de paie"
+        },
+        "accounts": {
+          "description": "Utilisé pour obtenir les données du compte"
+        }
+      }
+    },
+    "en": {
+      "short_description": "Fetch your paylips",
+      "long_description": "Fetch your paylips",
+      "permissions": {
+        "files": {
+          "description": "Required to save the paylips"
+        },
+        "accounts": {
+          "description": "Required to get the account's data"
+        }
+      }
+    }
+  },
+  "banksTransactionRegExp": "\\bsilae\\b",
+  "manifest_version": "2"
+}
