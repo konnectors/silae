@@ -22,7 +22,7 @@ async function start(fields, cozyParameters) {
   const documentList = await getDocumentList(loginInfo)
 
   log('info', 'Saving data to Cozy')
-  await savingDocuments(documentList, loginInfo, fields)
+  await savingDocuments(documentList, loginInfo, fields, this._account._id )
 }
 
 async function authenticate(username, password) {
@@ -149,7 +149,7 @@ async function getDocumentList(loginInfo) {
   return documentList
 }
 
-function savingDocuments(documentList, loginInfo, fields) {
+function savingDocuments(documentList, loginInfo, fields, accountId) {
   return Promise.all(
     documentList.map(document =>
       new Promise((resolve, reject) =>
@@ -192,7 +192,7 @@ function savingDocuments(documentList, loginInfo, fields) {
                 ],
                 fields,
                 {
-                  sourceAccount: this._account._id,
+                  sourceAccount: accountId,
                   sourceAccountIdentifier: fields.login
                 }
               )
