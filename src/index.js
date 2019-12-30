@@ -171,31 +171,33 @@ function savingDocuments(documentList, loginInfo, fields, accountId) {
               if (err) return reject(err)
               if (result.SWS_UtilisateurSalarieRecupererImageResult.Error)
                 reject(result.SWS_UtilisateurSalarieRecupererImageResult.Error)
-              const stream = toStream(Buffer.from(
+              const stream = toStream(
+                Buffer.from(
                   result.SWS_UtilisateurSalarieRecupererImageResult.Image,
                   'base64'
-              ))
+                )
+              )
               const filename =
                 'bulletin_' +
                 document.BUL_Periode.getFullYear() +
                 '_' +
-                (document.BUL_Periode.getMonth() + 1) +
+                ('0' + (document.BUL_Periode.getMonth() + 1)).slice (-2) +
                 '_' +
-                document.BUL_Periode.getDate() +
+                ('0' + document.BUL_Periode.getDate()).slice (-2) +
                 '.pdf'
               saveFiles(
                 [
-                    {
-                        filestream: stream,
-                        filename: filename,
-                    }
-                ],
-                  fields,
                   {
-                      contentType: 'application/pdf',
-                      sourceAccount: accountId,
-                      sourceAccountIdentifier: fields.login
+                    filestream: stream,
+                    filename: filename
                   }
+                ],
+                fields,
+                {
+                  contentType: 'application/pdf',
+                  sourceAccount: accountId,
+                  sourceAccountIdentifier: fields.login
+                }
               )
               resolve(result)
             }
