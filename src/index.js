@@ -5,6 +5,7 @@ process.env.SENTRY_DSN =
 /* eslint-disable require-atomic-updates */
 const { BaseKonnector, saveFiles, log } = require('cozy-konnector-libs')
 const soap = require('soap')
+const toStream = require('buffer-to-stream')
 
 const baseWSDL = 'https://www.silaexpert01.fr/Silae/SWS/SWS.asmx?WSDL'
 const basePath = '/Silae/SWS/SWS.asmx'
@@ -22,7 +23,7 @@ async function start(fields, cozyParameters) {
   const documentList = await getDocumentList(loginInfo)
 
   log('info', 'Saving data to Cozy')
-  await savingDocuments(documentList, loginInfo, fields, this._account._id )
+  await savingDocuments(documentList, loginInfo, fields, this._account._id)
 }
 
 async function authenticate(username, password) {
@@ -170,10 +171,10 @@ function savingDocuments(documentList, loginInfo, fields, accountId) {
               if (err) return reject(err)
               if (result.SWS_UtilisateurSalarieRecupererImageResult.Error)
                 reject(result.SWS_UtilisateurSalarieRecupererImageResult.Error)
-              const binaryData = Buffer.from(
-                result.SWS_UtilisateurSalarieRecupererImageResult.Image,
-                'base64'
-              )
+              const stream = toStream(Buffer.from(
+                  result.SWS_UtilisateurSalarieRecupererImageResult.Image,
+                  'base64'
+              ))
               const filename =
                 'bulletin_' +
                 document.BUL_Periode.getFullYear() +
@@ -184,17 +185,17 @@ function savingDocuments(documentList, loginInfo, fields, accountId) {
                 '.pdf'
               saveFiles(
                 [
-                  {
-                    filestream: binaryData,
-                    filename: filename,
-                    contentType: 'application/pdf'
-                  }
+                    {
+                        filestream: stream,
+                        filename: filename,
+                    }
                 ],
-                fields,
-                {
-                  sourceAccount: accountId,
-                  sourceAccountIdentifier: fields.login
-                }
+                  fields,
+                  {
+                      contentType: 'application/pdf',
+                      sourceAccount: accountId,
+                      sourceAccountIdentifier: fields.login
+                  }
               )
               resolve(result)
             }
