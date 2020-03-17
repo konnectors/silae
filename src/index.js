@@ -181,9 +181,9 @@ function savingDocuments(documentList, loginInfo, fields, accountId) {
                 'bulletin_' +
                 document.BUL_Periode.getFullYear() +
                 '_' +
-                ('0' + (document.BUL_Periode.getMonth() + 1)).slice (-2) +
+                ('0' + (document.BUL_Periode.getMonth() + 1)).slice(-2) +
                 '_' +
-                ('0' + document.BUL_Periode.getDate()).slice (-2) +
+                ('0' + document.BUL_Periode.getDate()).slice(-2) +
                 '.pdf'
               saveFiles(
                 [
