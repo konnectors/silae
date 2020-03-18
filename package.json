@@ -43,7 +43,7 @@
     "soap": "0.29.0"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "5.0.4",
+    "copy-webpack-plugin": "5.1.1",
     "cozy-app-publish": "0.19.3",
     "cozy-jobs-cli": "1.13.0",
     "eslint": "^6.4.0",
