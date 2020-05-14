@@ -40,7 +40,7 @@
   "dependencies": {
     "buffer-to-stream": "^1.0.0",
     "cozy-konnector-libs": "4.34.3",
-    "soap": "0.29.0"
+    "soap": "0.31.0"
   },
   "devDependencies": {
     "copy-webpack-plugin": "5.0.4",
