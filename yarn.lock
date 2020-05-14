@@ -1460,10 +1460,10 @@ cosmiconfig@^5.2.1:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-cozy-app-publish@0.19.3:
-  version "0.19.3"
-  resolved "https://registry.yarnpkg.com/cozy-app-publish/-/cozy-app-publish-0.19.3.tgz#b9671551fc45e48c7c8319802cb5761b70c44811"
-  integrity sha512-voveSjCYTViooWgbmxyYflL8qP1mLomeE11mE5kBZVf3z1uMod+SU+oxhQKiF9sEIGU11IzmR+WU6E1TWaLOIQ==
+cozy-app-publish@0.22.3:
+  version "0.22.3"
+  resolved "https://registry.yarnpkg.com/cozy-app-publish/-/cozy-app-publish-0.22.3.tgz#4c45d1c3e2d36e4c00707633b1f68ea69b811725"
+  integrity sha512-zLxz0A/sbICa22Ti1Kp//v4zkZg3UIJoDrdfLYrZkFtTO+igL2Q4IqGUjCNCjjm3KsRcdk6aeh1i2fs6fmuZlw==
   dependencies:
     argparse "^1.0.10"
     chalk "2.4.2"
