@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "buffer-to-stream": "^1.0.0",
-    "cozy-konnector-libs": "4.34.3",
+    "cozy-konnector-libs": "4.34.5",
     "soap": "0.31.0"
   },
   "devDependencies": {
