@@ -20,7 +20,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "yarn lint"
     }
   },
   "scripts": {
@@ -28,8 +28,6 @@
     "dev": "cozy-konnector-dev",
     "standalone": "cozy-konnector-standalone",
     "pretest": "npm run clean",
-    "test": "konitor testit .",
-    "check": "konitor check .",
     "clean": "rm -rf ./data",
     "build": "webpack",
     "lint": "eslint --fix .",
@@ -39,22 +37,18 @@
   },
   "dependencies": {
     "buffer-to-stream": "^1.0.0",
-    "cozy-konnector-libs": "4.34.3",
-    "soap": "0.29.0"
+    "cozy-konnector-libs": "4.34.5",
+    "soap": "0.32.0"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "5.0.4",
-    "cozy-app-publish": "0.19.3",
-    "cozy-jobs-cli": "1.13.4",
-    "eslint": "^6.4.0",
-    "eslint-config-cozy-app": "1.3.2",
-    "eslint-plugin-prettier": "3.1.1",
+    "copy-webpack-plugin": "6.0.3",
+    "cozy-app-publish": "0.24.0",
+    "cozy-jobs-cli": "1.13.6",
+    "eslint-config-cozy-app": "1.5.0",
     "git-directory-deploy": "1.5.1",
-    "husky": "3.0.7",
-    "konitor": "0.10.3",
-    "prettier": "^1.18.2",
-    "svgo": "1.3.0",
-    "webpack": "4.41.0",
-    "webpack-cli": "3.3.9"
+    "husky": "4.2.5",
+    "svgo": "1.3.2",
+    "webpack": "4.44.1",
+    "webpack-cli": "3.3.12"
   }
 }
