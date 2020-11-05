@@ -1477,17 +1477,17 @@ cozy-client@16.1.1, cozy-client@^16.1.1:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
-cozy-client@^15.4.2:
-  version "15.6.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-15.6.0.tgz#11a14f1339c500928c3f9dce44a1be5cbba8b0e4"
-  integrity sha512-IcQlKl1LukHQFhvHhm5I/uShNjgthxxomDQY8MO1xBfnMrbWjnwgcgJz5+YyRerIBTvrj7FRIF/mygWfMBzWBg==
+cozy-client@^16.1.1:
+  version "16.1.1"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-16.1.1.tgz#6434b7c6a1776d44da95bc1e7e552ca3a5d23fd8"
+  integrity sha512-cb4VE1F9qkLC0LPhPMyMLq5IZ5nW0ntJz8gYjkeW5KcSFfjkTmrG7qwudfxTOW3GCs4hnS2vhQRaFN7QxO5nrw==
   dependencies:
     "@cozy/minilog" "1.0.0"
     btoa "^1.2.1"
     cozy-device-helper "^1.7.3"
     cozy-logger "^1.6.0"
-    cozy-stack-client "^15.6.0"
-    isomorphic-fetch "^2.2.1"
+    cozy-stack-client "^16.0.0"
+    isomorphic-fetch "^3.0.0"
     lodash "^4.17.13"
     microee "^0.0.6"
     open "^7.0.2"
@@ -1549,10 +1549,10 @@ cozy-jobs-cli@1.14.0:
     pretty "2.0.0"
     strip-json-comments "3.1.1"
 
-cozy-konnector-libs@4.35.0:
-  version "4.35.0"
-  resolved "https://registry.yarnpkg.com/cozy-konnector-libs/-/cozy-konnector-libs-4.35.0.tgz#5ae33a0ef1c41ec4d2f96964cecc61766cea169b"
-  integrity sha512-6MeBpfKQHt0hlP4J2I8KQ66VQ/SbpP4B/asthyqUXWizeD9AXec2H3DlxX5zJT3u2Imq7AR5uuq+cOzYsyZ6sA==
+cozy-konnector-libs@4.36.0:
+  version "4.36.0"
+  resolved "https://registry.yarnpkg.com/cozy-konnector-libs/-/cozy-konnector-libs-4.36.0.tgz#2c52031ada50a1f8035cad441dd63ec3144f726b"
+  integrity sha512-ZXxVA5pC2TxPe/8EF01Zc2gd5NaFF+7oLw3aREmulXGSB63oXEl9FI3LOyIkByVEvrNVcUVwcsSV19ikMc9ekg==
   dependencies:
     babel-runtime "^6.26.0"
     bluebird "^3.7.2"
@@ -1560,12 +1560,12 @@ cozy-konnector-libs@4.35.0:
     btoa "1.2.1"
     cheerio "^1.0.0-rc.3"
     classificator "^0.3.3"
-    cozy-client "^15.4.2"
+    cozy-client "^16.1.1"
     cozy-client-js "^0.17.4"
-    cozy-doctypes "^1.74.7"
+    cozy-doctypes "^1.74.8"
     cozy-logger "^1.6.0"
     date-fns "^2.16.1"
-    file-type "^16.0.0"
+    file-type "^16.0.1"
     geco "^0.11.1"
     lodash-id "^0.14.0"
     lowdb "^1.0.0"
