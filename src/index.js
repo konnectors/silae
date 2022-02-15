@@ -213,8 +213,7 @@ function savingDocuments(documentList, loginInfo, fields, accountId) {
                 {
                   contentType: 'application/pdf',
                   sourceAccount: accountId,
-                  sourceAccountIdentifier: fields.login,
-                  fileIdAttribute: ['filename']
+                  sourceAccountIdentifier: fields.login
                 }
               )
               resolve(result)
