@@ -30,6 +30,9 @@
   ],
   "screenshots": [],
   "permissions": {
+    "carbon_copy": {
+      "type": "io.cozy.certified.carbon_copy"
+    },
     "files": {
       "type": "io.cozy.files"
     },
@@ -53,6 +56,9 @@
       "short_description": "Récupère vos fiches de paie",
       "long_description": "Récupère vos fiches de paie",
       "permissions": {
+        "carboncopy": {
+          "description": "Utilisé pour certifier que vos fichiers sont copie conforme avec les documents d'origine"
+        },
         "files": {
           "description": "Utilisé pour sauvegarder les fiches de paie"
         },
@@ -65,6 +71,9 @@
       "short_description": "Fetch your paylips",
       "long_description": "Fetch your paylips",
       "permissions": {
+        "carboncopy": {
+          "description": "Use to certify your files are the exact copy of the originals"
+        },
         "files": {
           "description": "Required to save the paylips"
         },
@@ -74,6 +83,16 @@
       }
     }
   },
+  "qualification_labels": [
+    "pay_sheet"
+  ],
+  "features": [
+    "LOGIN_OK",
+    "METADATA_DEDUP",
+    "CARBON_COPY",
+    "DOC_QUALIFICATION_V2",
+    "SENTRY_V2"
+  ],
   "banksTransactionRegExp": "\\bsilae\\b",
   "manifest_version": "2"
 }
