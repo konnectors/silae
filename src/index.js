@@ -1,9 +1,18 @@
 process.env.SENTRY_DSN =
   process.env.SENTRY_DSN ||
-  'https://699e0e989af94c5faf8fb83096b6e896@sentry.cozycloud.cc/129'
+  'https://b373b6d0b9a4408c8ac7a5881ea84688@errors.cozycloud.cc/28'
 
 /* eslint-disable require-atomic-updates */
-const { BaseKonnector, saveFiles, log } = require('cozy-konnector-libs')
+const {
+  BaseKonnector,
+  saveFiles,
+  log,
+  cozyClient
+} = require('cozy-konnector-libs')
+
+const models = cozyClient.new.models
+const { Qualification } = models.document
+
 const soap = require('soap')
 const toStream = require('buffer-to-stream')
 
@@ -189,14 +198,23 @@ function savingDocuments(documentList, loginInfo, fields, accountId) {
                 [
                   {
                     filestream: stream,
-                    filename: filename
+                    filename: filename,
+                    metadata: {
+                      contentAuthor: 'silaexperts.fr',
+                      issueDate: document.BUL_Periode.getDate(),
+                      datetime: new Date(),
+                      datetimeLabel: `issueDate`,
+                      carbonCopy: true,
+                      qualification: Qualification.getByLabel('pay_sheet')
+                    }
                   }
                 ],
                 fields,
                 {
                   contentType: 'application/pdf',
                   sourceAccount: accountId,
-                  sourceAccountIdentifier: fields.login
+                  sourceAccountIdentifier: fields.login,
+                  fileIdAttribute: ['filename']
                 }
               )
               resolve(result)
