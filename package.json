@@ -36,13 +36,13 @@
   },
   "dependencies": {
     "buffer-to-stream": "^1.0.0",
-    "cozy-konnector-libs": "4.56.4",
+    "cozy-konnector-libs": "5.12.1",
     "soap": "0.32.0"
   },
   "devDependencies": {
     "copy-webpack-plugin": "6.2.1",
     "cozy-app-publish": "0.24.0",
-    "cozy-jobs-cli": "1.20.2",
+    "cozy-jobs-cli": "2.4.4",
     "eslint-config-cozy-app": "1.5.0",
     "git-directory-deploy": "1.5.1",
     "husky": "4.3.0",
